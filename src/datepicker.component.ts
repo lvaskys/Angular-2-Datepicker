@@ -219,6 +219,7 @@ interface ValidationResult {
         readonly="true"
       >
       <div
+	  #calendarDiv
         class="datepicker__calendar"
         *ngIf="showCalendar"
       >
@@ -359,6 +360,9 @@ export class DatepickerComponent implements OnInit, OnChanges {
   clickListener: Function;
   // forms
   yearControl: FormControl;
+  
+  @ElementRef('calendarDiv')
+  calendarDiv: ElementRef;
 
 
   constructor(private renderer: Renderer, private elementRef: ElementRef) {
@@ -623,8 +627,12 @@ export class DatepickerComponent implements OnInit, OnChanges {
   * Closes the calendar if a click is not within the datepicker component
   */
   handleGlobalClick(event: MouseEvent): void {
-    const withinElement = this.elementRef.nativeElement.contains(event.target);
-    if (!this.elementRef.nativeElement.contains(event.target)) {
+	  
+	//const withinElement = this.calendarDiv.nativeElement.contains(event.target);
+	  
+	  
+    //const withinElement = this.elementRef.nativeElement.contains(event.target);
+    if (!this.calendarDiv.nativeElement.contains(event.target)) {
       this.closeCalendar();
     }
   }
